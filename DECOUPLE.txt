@@ -1,0 +1,110 @@
+1. What files do you need to send along for only the views to compile? This list must include the
+interfaces and implementations for the view itself.
+a) ImageView.java (non-gui)
+    i) ImageController.java (interface)
+b) SwingGuiView.java (gui)
+    i) ImageController.java (Interface)
+
+2. For each file, briefly explain why that file is necessary for the view to work.
+a) ImageView.java - You need this obviously for ImageView.java to compile
+    i) ImageController.java
+           - This is included because the ImageViewInterface has a method setController to remove
+           cyclycale referencing. This makes more sense when you read part b. The controller file is
+            never actually used, but is indlcuded to comply with the interface's methods.
+b) SwingGuiView
+    i) ImageController
+        - This controller file is included because its needed in the constrcutor. More specifically,
+         the actionPreformed(ActionEvent e) gets a string version of the actions preformed in the
+         gui, and passes it into the controller. Without a controller object, there is nothing
+         linking them to each other.
+         - To avoid cyclical/ circular construction, the initalization of MVC is as follows:
+            ImageModelInterface model = new ImageModelPPM();
+            // controller passsed in is null, and will be switched once the controller is inialzied
+            with frame, to avoid needed to pass in cont into frame or vise versa, which would
+            introduce circular logic.
+            SwingGuiView frame  = new SwingGuiView(null);
+            ImageControllerGUI cont = new ImageControllerGUI(model, frame);
+            frame.setController(cont);
+
+
+            As opposed to something like:
+              ImageModelInterface model = new ImageModelPPM();
+              SwingGuiView frame  = new SwingGuiView(new ImageControllerGui(model, frame);
+              ImageControllerGUI cont = new ImageControllerGUI(model, frame);
+
+
+2. What files do you need to send along for only the controller to compile? This list must include the
+interfaces and implementations for the controller itself.
+a) ImageController (interface)
+
+b) AbstractController
+
+c) ImageControllerImpl (text version)
+
+d) ImageControllerGui (GUI)
+
+e) ImageModelInterface
+
+f) ImageViewInterface
+
+g) The command classes
+    ControllerCOmmand (interface)
+    AbstractCOmmand
+    AddImageToLayer
+    AddLayer
+    ClearLayer
+    LoadProject
+    newProject
+    RemoveFilter
+    RemoveLayer
+    SaveImage
+    SaveProject
+    
+    Menu (interface)
+    MenuBefore
+    MenuAfter
+    
+    AbstractFilter
+    
+    DarkenAbstract
+    DarkenIntensity
+    DarkenLuma
+    DarkenValue
+    DarkenMultiply
+    Difference
+    
+    BrightenAbstract
+    BrightenLuma
+    BrightenIntensity
+    BrightenScreen
+    BrightenValue
+    
+    ChangeBlue
+    ChangeGreen
+    ChangeRed
+    
+
+2. For each file, briefly explain why that file is necessary for the controller to work.
+
+a) ImageController (interface)
+    Controller classes implement this, so you need it.
+
+b) AbstractController
+    Controller concrete classes extend this, so you need it.
+
+c) ImageControllerImpl (text version)
+    Need this because its a controller.
+
+d) ImageControllerGui (GUI)
+    Need this because its a controller.
+
+e) ImageModelInterface
+    Is needed to alter the data, based on commands from the controller. Without it, nothing would change.
+    
+f) ImageViewInterface
+    To display the appropriete outputs based on the given controller and view implementation
+
+g) The command classes
+    These are all needed for the controller to work, because this design utilzied the command design pattern. Not including them would mean not indlucing the core behavior of the controller
+
+      

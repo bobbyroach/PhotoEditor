@@ -1,0 +1,54 @@
+new-project
+1000
+1000
+qq
+add-layer ww
+add-layer ee
+add-layer rr
+add-layer tt
+add-layer yy
+add-layer uu
+add-layer ii
+add-layer oo
+add-layer pp
+add-layer aa
+add-layer ss
+add-layer dd
+add-layer ff
+add-layer gg
+add-layer hh
+add-image-to-layer ww image\tako.ppm 0 0
+add-image-to-layer ee image\purpleImage.ppm 250 250
+add-image-to-layer rr image\black.ppm 0 700
+add-image-to-layer tt image\A5ClassDiagram.png 600 600
+add-image-to-layer yy image\a4Image.ppm 500 0
+add-image-to-layer uu image\tako.ppm 500 600
+add-image-to-layer ii image\white.ppm 500 600
+set-filter red-component ee
+set-filter blue-component rr
+set-filter green-component tt
+add-image-to-layer yy image\a4Image.ppm 0 400
+add-image-to-layer uu image\a4Image.ppm 0 800
+set-filter brighten-value yy
+set-filter brighten-intensity uu
+set-filter brighten-luma ww
+add-image-to-layer oo image\purpleImage.ppm 0 0
+set-filter brighten-screen oo
+set-filter difference ii
+set-filter difference ee
+add-image-to-layer pp image\tako.ppm 400 400
+set-filter darken-multiply aa
+set-filter darken-multiply pp
+add-image-to-layer aa image\a4Image.ppm 600 0
+add-image-to-layer ss image\a4Image.ppm 900 0
+set-filter darken-luma ss
+add-image-to-layer dd image\tako.ppm 900 0
+set-filter difference dd
+add-image-to-layer ff image\a4Image.ppm 850 850
+set-filter darken-intensity ff
+add-image-to-layer gg image\a4Image.ppm 0 850
+set-filter darken-value gg
+add-image-to-layer hh image\tako.ppm 200 200
+set-filter difference hh
+save-image image\res\A7AllFiltersSameButFromScriptAndAsJPG.jpg
+quit
